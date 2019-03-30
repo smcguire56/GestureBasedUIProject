@@ -30,7 +30,7 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_ReverseTorque;
         [SerializeField] private float m_MaxHandbrakeTorque;
         [SerializeField] private float m_Downforce = 100f;
-        [SerializeField] private SpeedType m_SpeedType;
+        [SerializeField] private readonly SpeedType m_SpeedType;
         [SerializeField] private float m_Topspeed = 200;
         [SerializeField] private static int NoOfGears = 7;
         [SerializeField] private float m_RevRangeBoundary = 1f;
@@ -40,7 +40,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
         private float m_SteerAngle;
-        private int m_GearNum;
+        private  int m_GearNum;
         private float m_GearFactor;
         private float m_OldRotation;
         private float m_CurrentTorque;
@@ -55,6 +55,12 @@ namespace UnityStandardAssets.Vehicles.Car
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
         public float RPMSpeed { get; private set; }
+
+        public void Gear()
+        {
+            Debug.Log("gear: " + m_GearNum);
+            m_GearNum++;
+        }
 
         // Use this for initialization
         private void Start()
@@ -72,6 +78,7 @@ namespace UnityStandardAssets.Vehicles.Car
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
 
         }
+
 
 
         private void GearChanging()
@@ -98,39 +105,35 @@ namespace UnityStandardAssets.Vehicles.Car
                     switch (m_GearNum)
                     {
                         case 0:
-                            RPMSpeed = CurrentSpeed;
-                            m_Topspeed = 40;
+                            RPMSpeed = 0;
+                            m_Topspeed = 20;
                             break;
                         case 1:
-                            m_Topspeed = 70;
-                            RPMSpeed = CurrentSpeed - 40;                  
+                            RPMSpeed = 20;               
+                            m_Topspeed = 40;
                             break;
                         case 2:
-                            m_Topspeed = 90;
-                            RPMSpeed = CurrentSpeed - 70;
-
+                            RPMSpeed = 40;
+                            m_Topspeed = 60;
                             break;
                         case 3:
-                            m_Topspeed = 120;
-                            RPMSpeed = CurrentSpeed - 90;
-
+                            RPMSpeed = 60;                  
+                            m_Topspeed = 80;
                             break;
                         case 4:
-                            m_Topspeed = 150;
+                            RPMSpeed = 80;
+                            m_Topspeed = 100;
                             break;
                         case 5:
-                            m_Topspeed = 200;
+                            RPMSpeed = 100;
+                            m_Topspeed = 120;
                             break;
 
                     }
 
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        //AnalogueRPMConverter.ResetSpeed(0, 60);
-                        //RPMSpeed = CurrentSpeed;
-
                         Debug.Log("gear: " + m_GearNum);
-                        Debug.Log(CurrentSpeed);
                         m_GearNum++;
                     }
                 }
@@ -222,8 +225,7 @@ namespace UnityStandardAssets.Vehicles.Car
             if (m_CarDriveType == CarDriveType.FourWheelDrive)
             {
                 AnalogueSpeedConverter.ShowSpeed(CurrentSpeed, 0, 120);
-                Debug.Log(RPMSpeed);
-                AnalogueRPMConverter.ShowSpeed(RPMSpeed, 0, 60);
+                AnalogueRPMConverter.ShowSpeed((CurrentSpeed - RPMSpeed), 0, 25);
             }
 
         }

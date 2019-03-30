@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e9f73c111e5a1436295869186e2e823f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - myo: {fileID: 100002, guid: 863250160b56e46dbb2d227833b7338a, type: 2}
+  - waveInMaterial: {fileID: 2100000, guid: beca7d66ce77b41769cf37f1a0f2c355, type: 2}
+  - waveOutMaterial: {fileID: 2100000, guid: 327189f2ad32a48539551572046b5f84, type: 2}
+  - doubleTapMaterial: {fileID: 2100000, guid: 2481aef9b23ed4d869d5fb417a44fefd, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
