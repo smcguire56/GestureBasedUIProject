@@ -31,11 +31,14 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_MaxHandbrakeTorque;
         [SerializeField] private float m_Downforce = 100f;
         [SerializeField] private readonly SpeedType m_SpeedType;
+        [SerializeField] public int inputW = 1;
+        [SerializeField] public int inputS = 0;
         [SerializeField] private float m_Topspeed = 200;
         [SerializeField] private static int NoOfGears = 7;
         [SerializeField] private float m_RevRangeBoundary = 1f;
         [SerializeField] private float m_SlipLimit;
         [SerializeField] private float m_BrakeTorque;
+        [SerializeField] private float Handbrake = 0;
 
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
@@ -56,10 +59,16 @@ namespace UnityStandardAssets.Vehicles.Car
         public float AccelInput { get; private set; }
         public float RPMSpeed { get; private set; }
 
+
         public void Gear()
         {
-            Debug.Log("gear: " + m_GearNum);
+            //Debug.Log("gear: " + m_GearNum);
             m_GearNum++;
+        }
+        public void UpdateTopSpeed()
+        {
+            inputW = 0;
+            inputS = 1;
         }
 
         // Use this for initialization
@@ -180,6 +189,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public void Move(float steering, float accel, float footbrake, float handbrake)
         {
+            handbrake = Handbrake;
             for (int i = 0; i < 4; i++)
             {
                 Quaternion quat;

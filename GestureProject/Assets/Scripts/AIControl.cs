@@ -21,11 +21,11 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             // pass the input to the car!
             float h = 0;
-            float v = 1;
-
-            #if !MOBILE_INPUT
-                        float handbrake = 0;
-                        m_Car.Move(h, v, v, handbrake);
+            float w = m_Car.inputW;
+            float s = m_Car.inputS;
+#if !MOBILE_INPUT
+            float handbrake = 0;
+                        m_Car.Move(h, w, s, handbrake);
             #else
                         m_Car.Move(h, v, v, 0f);
             #endif
