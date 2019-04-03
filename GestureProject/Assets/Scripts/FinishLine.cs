@@ -6,7 +6,8 @@ public class FinishLine : MonoBehaviour
 
     public CarController car;
     public GameObject winUI;
-    private bool WinnerFound = false;
+    public GameObject loseUI;
+    private AudioSource[] allAudioSources;
 
     void OnCollisionEnter(Collision collisionInfo)
     {
@@ -14,23 +15,31 @@ public class FinishLine : MonoBehaviour
         Debug.Log("There are " + collisionInfo.contacts.Length + " point(s) of contacts");
         Debug.Log("Their relative velocity is " + collisionInfo.relativeVelocity);
 
-        if (gameObject.name.Equals("Car") && WinnerFound == false)
+        if (gameObject.name.Equals("Car"))
         {
             Debug.Log("you win");
-            WinnerFound = true;
             winUI.SetActive(true);
             car.UpdateTopSpeed();
+            Time.timeScale = 0.0f;
+            StopAllAudio();
 
         }
-
-        if (gameObject.name.Equals("OtherCar") && WinnerFound == false)
+        else if (gameObject.name.Equals("OtherCar"))
         {
             Debug.Log("you lose");
-            WinnerFound = true;
-            winUI.SetActive(false);
+            loseUI.SetActive(true);
             car.UpdateTopSpeed();
-
+            Time.timeScale = 0.0f;
+            StopAllAudio();
         }
     }
 
+    void StopAllAudio()
+    {
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        foreach (AudioSource audioS in allAudioSources)
+        {
+            audioS.Stop();
+        }
+    }
 }
