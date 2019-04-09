@@ -43,7 +43,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
         private float m_SteerAngle;
-        private  int m_GearNum = 0;
+        public int m_GearNum = 0;
         private float m_GearFactor;
         private float m_OldRotation;
         private float m_CurrentTorque;
@@ -58,11 +58,13 @@ namespace UnityStandardAssets.Vehicles.Car
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
         public float RPMSpeed { get; private set; }
+        public updateGear text;
 
 
         public void Gear()
         {
-            //Debug.Log("gear: " + m_GearNum);
+            Debug.Log("gear: " + m_GearNum);
+            text.setGear(m_GearNum);
             m_GearNum++;
         }
         public void UpdateTopSpeed()
@@ -147,17 +149,11 @@ namespace UnityStandardAssets.Vehicles.Car
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         //Debug.Log("gear: " + m_GearNum);
-                        m_GearNum++;
+                        Gear();
                     }
                 }
 
             }
-        }
-
-        public void Boost()
-        {
-            m_TractionControl = 1f;
-            Debug.Log("BOOOOOSTs");
         }
 
 
