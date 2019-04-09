@@ -31,9 +31,9 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_MaxHandbrakeTorque;
         [SerializeField] private float m_Downforce = 100f;
         [SerializeField] private readonly SpeedType m_SpeedType;
-        [SerializeField] public int inputW = 1;
-        [SerializeField] public int inputS = 0;
-        [SerializeField] private float m_Topspeed = 200;
+        [SerializeField] public int inputW;
+        [SerializeField] public int inputS;
+        [SerializeField] public float m_Topspeed = 0;
         [SerializeField] private static int NoOfGears = 7;
         [SerializeField] private float m_RevRangeBoundary = 1f;
         [SerializeField] private float m_SlipLimit;
@@ -43,7 +43,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
         private float m_SteerAngle;
-        private  int m_GearNum;
+        private  int m_GearNum = 0;
         private float m_GearFactor;
         private float m_OldRotation;
         private float m_CurrentTorque;
@@ -69,6 +69,11 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             inputW = 0;
             inputS = 1;
+        }
+        public void InitialMove()
+        {
+            inputW = 1;
+            inputS = 0;
         }
 
         // Use this for initialization
@@ -103,11 +108,10 @@ namespace UnityStandardAssets.Vehicles.Car
 
             if (f > upgearlimit && (m_GearNum < (NoOfGears - 1)))
             {
-                //Debug.Log("gear: " +m_GearNum);
                 if (m_CarDriveType == CarDriveType.FrontWheelDrive)
                 {
                     m_GearNum++;
-
+                    
                 }
                 else
                 {
@@ -142,12 +146,18 @@ namespace UnityStandardAssets.Vehicles.Car
 
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Debug.Log("gear: " + m_GearNum);
+                        //Debug.Log("gear: " + m_GearNum);
                         m_GearNum++;
                     }
                 }
 
             }
+        }
+
+        public void Boost()
+        {
+            m_TractionControl = 1f;
+            Debug.Log("BOOOOOSTs");
         }
 
 

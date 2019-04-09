@@ -67,7 +67,8 @@ public class ThalmicMyo : MonoBehaviour {
         _myo.NotifyUserAction ();
     }
 
-    public bool isReady = true;
+    public bool gearChangeTimer = true;
+    public bool BoostActiveTimer = true;
     public int poseCount = 0;
 
 
@@ -93,7 +94,7 @@ public class ThalmicMyo : MonoBehaviour {
             }
             pose = _myoPose;
 
-            if (pose.Equals(Pose.DoubleTap) && isReady)
+            if (pose.Equals(Pose.DoubleTap) && gearChangeTimer)
             {
                 poseCount++;
                 Debug.Log(poseCount);
@@ -101,16 +102,32 @@ public class ThalmicMyo : MonoBehaviour {
                 //car.GetComponent<CarController>().Gear();
                 car.Gear();
 
-                isReady = false;
-                StartCoroutine("Wait");
+                gearChangeTimer = false;
+                StartCoroutine("WaitGearChange");
             }
+
+            if (pose.Equals(Pose.Fist))
+            {
+                car.Boost();
+                BoostActiveTimer = false;
+                StartCoroutine("WaitBoostChange");
+
+
+            }
+
             unlocked = _myoUnlocked;
         }
     }
-    public IEnumerator Wait()
+    public IEnumerator WaitGearChange()
     {
-        yield return new WaitForSeconds(2);
-        isReady = true;
+        yield return new WaitForSeconds(2f);
+        gearChangeTimer = true;
+    }
+    public IEnumerator WaitBoostChange()
+    {
+        Debug.Log("wiait");
+        yield return new WaitForSeconds(10f);
+        BoostActiveTimer = true;
     }
 
 
