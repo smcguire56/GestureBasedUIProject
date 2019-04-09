@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour {
         if (counterDownDone)
         {
             car.m_Topspeed = 200.0f;
-            Othercar.m_Topspeed = 100.0f;
+            Othercar.m_Topspeed = 80.0f;
             counterDownDone = false;
 
         }

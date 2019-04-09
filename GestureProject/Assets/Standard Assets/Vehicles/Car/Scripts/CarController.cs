@@ -63,9 +63,9 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public void Gear()
         {
+            m_GearNum++;
             Debug.Log("gear: " + m_GearNum);
             text.setGear(m_GearNum);
-            m_GearNum++;
         }
         public void UpdateTopSpeed()
         {
@@ -120,7 +120,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     switch (m_GearNum)
                     {
                         case 0:
-                            RPMSpeed = 0;
+                            RPMSpeed = 2;
                             m_Topspeed = 20;
                             break;
                         case 1:
@@ -154,6 +154,11 @@ namespace UnityStandardAssets.Vehicles.Car
                 }
 
             }
+        }
+
+        public void Boost()
+        {
+            m_TractionControl = 1f;
         }
 
 

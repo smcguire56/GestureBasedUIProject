@@ -68,6 +68,7 @@ public class ThalmicMyo : MonoBehaviour {
     }
 
     public bool isReady = true;
+    public bool isReady2 = true;
     public int poseCount = 0;
 
 
@@ -104,13 +105,27 @@ public class ThalmicMyo : MonoBehaviour {
                 isReady = false;
                 StartCoroutine("Wait");
             }
+            if (pose.Equals(Pose.Fist) && isReady2)
+            {
+                //CarController car = new CarController();
+                //car.GetComponent<CarController>().Gear();
+                car.Boost();
+
+                isReady2 = false;
+                StartCoroutine("Wait2");
+            }
             unlocked = _myoUnlocked;
         }
     }
     public IEnumerator Wait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2f);
         isReady = true;
+    }
+    public IEnumerator Wait2()
+    {
+        yield return new WaitForSeconds(2f);
+        isReady2 = true;
     }
 
 

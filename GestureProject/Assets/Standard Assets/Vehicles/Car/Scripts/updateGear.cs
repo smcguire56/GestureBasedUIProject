@@ -9,7 +9,7 @@ public class updateGear : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        myText.text = "Gear: 0";
+        myText.text = "Gear: 1";
     }
 
     public void setGear(int gear)
