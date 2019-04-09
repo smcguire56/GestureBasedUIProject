@@ -53,6 +53,12 @@ public class PauseMenu : MonoBehaviour {
         Application.Quit();
     }
 
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+    }
+
     void StopAllAudio()
     {
         allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
