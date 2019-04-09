@@ -43,7 +43,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
         private float m_SteerAngle;
-        public int m_GearNum = 0;
+        public int m_GearNum = 1;
         private float m_GearFactor;
         private float m_OldRotation;
         private float m_CurrentTorque;
@@ -120,7 +120,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     switch (m_GearNum)
                     {
                         case 0:
-                            RPMSpeed = 2;
+                            RPMSpeed = 0;
                             m_Topspeed = 20;
                             break;
                         case 1:
@@ -148,7 +148,6 @@ namespace UnityStandardAssets.Vehicles.Car
 
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        //Debug.Log("gear: " + m_GearNum);
                         Gear();
                     }
                 }

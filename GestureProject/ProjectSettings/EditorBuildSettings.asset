@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RaceArea.unity
     guid: 51d59b630678d6e48a7332914f9771b6
+  - enabled: 1
+    path: Assets/Scenes/Controls.unity
+    guid: 7c31fcef33b8f2348832f0ad38e3edae
   m_configObjects: {}

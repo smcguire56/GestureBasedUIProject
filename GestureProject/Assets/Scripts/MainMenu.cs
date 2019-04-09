@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour {
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("RaceArea");
+        SceneManager.LoadScene("Controls");
     }
     public void Options()
     {
