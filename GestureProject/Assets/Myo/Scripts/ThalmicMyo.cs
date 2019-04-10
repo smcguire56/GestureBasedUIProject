@@ -32,6 +32,7 @@ public class ThalmicMyo : MonoBehaviour {
     public Pose pose = Pose.Unknown;
 
     public CarController car;
+    public GameObject boost;
 
     // Myo's current accelerometer reading, representing the acceleration due to force on the Myo armband in units of
     // g (roughly 9.8 m/s^2) and following Unity coordinate system conventions.
@@ -97,9 +98,6 @@ public class ThalmicMyo : MonoBehaviour {
             if (pose.Equals(Pose.DoubleTap) && isReady)
             {
                 poseCount++;
-                Debug.Log(poseCount);
-                //CarController car = new CarController();
-                //car.GetComponent<CarController>().Gear();
                 car.Gear();
 
                 isReady = false;
@@ -107,8 +105,8 @@ public class ThalmicMyo : MonoBehaviour {
             }
             if (pose.Equals(Pose.Fist) && isReady2)
             {
-                //CarController car = new CarController();
-                //car.GetComponent<CarController>().Gear();
+                Debug.Log("BOOST ACTIVE");
+                boost.SetActive(true);
                 car.Boost();
 
                 isReady2 = false;

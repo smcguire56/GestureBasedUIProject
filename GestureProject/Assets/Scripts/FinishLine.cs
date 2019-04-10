@@ -11,13 +11,8 @@ public class FinishLine : MonoBehaviour
 
     void OnCollisionEnter(Collision collisionInfo)
     {
-        Debug.Log("Detected collision between " + gameObject.name + " and " + collisionInfo.collider.name);
-        Debug.Log("There are " + collisionInfo.contacts.Length + " point(s) of contacts");
-        Debug.Log("Their relative velocity is " + collisionInfo.relativeVelocity);
-
         if (gameObject.name.Equals("Car"))
         {
-            Debug.Log("you win");
             winUI.SetActive(true);
             car.UpdateTopSpeed();
             Time.timeScale = 0.0f;
@@ -26,7 +21,6 @@ public class FinishLine : MonoBehaviour
         }
         else if (gameObject.name.Equals("OtherCar"))
         {
-            Debug.Log("you lose");
             loseUI.SetActive(true);
             car.UpdateTopSpeed();
             Time.timeScale = 0.0f;

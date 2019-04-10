@@ -64,7 +64,6 @@ namespace UnityStandardAssets.Vehicles.Car
         public void Gear()
         {
             m_GearNum++;
-            Debug.Log("gear: " + m_GearNum);
             text.setGear(m_GearNum);
         }
         public void UpdateTopSpeed()
