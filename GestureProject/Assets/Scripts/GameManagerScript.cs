@@ -8,7 +8,7 @@ public class GameManagerScript : MonoBehaviour {
     public bool counterDownDone = false;
     public CarController car;
     public CarController Othercar;
-	
+
 	// Update is called once per frame
 	void Update () {
         if (counterDownDone)
@@ -19,4 +19,5 @@ public class GameManagerScript : MonoBehaviour {
 
         }
     }
+
 }
